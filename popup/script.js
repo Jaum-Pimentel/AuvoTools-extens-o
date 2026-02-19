@@ -1,7 +1,7 @@
 // URL do backend — deve ser igual à constante BACKEND_URL em utils.js
 // Desenvolvimento local: 'http://localhost:3000'
 // Produção: 'https://SEU-APP.up.railway.app'
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://auvotools-extens-o-production.up.railway.app';
 
 document.addEventListener('DOMContentLoaded', () => {
     const togglePrint = document.getElementById('togglePrintMode');

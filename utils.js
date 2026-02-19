@@ -28,7 +28,7 @@ const GEMINI_MODEL = "gemini-2.0-flash";
 // URL do backend — atualizar para a URL do Railway após o deploy
 // Desenvolvimento local: 'http://localhost:3000'
 // Produção: 'https://SEU-APP.up.railway.app'
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://auvotools-extens-o-production.up.railway.app';
 
 // --- ÍCONES SVG (BOOTSTRAP ICONS) ---
 const ICONES_SVG = {
