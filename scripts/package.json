@@ -1,0 +1,12 @@
+{
+  "name": "extrator-pdfs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Extrai texto dos PDFs e gera JSON",
+  "scripts": {
+    "extrair": "node extrair-pdfs.js"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  }
+}

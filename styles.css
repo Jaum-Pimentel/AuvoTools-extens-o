@@ -1,0 +1,1097 @@
+/* ==========================================================================
+   1. ESTRUTURA PRINCIPAL (WRAPPER & CONTAINER)
+   ========================================================================== */
+
+.auvo-ext-wrapper {
+  position: relative;
+  display: inline-flex !important;
+  align-items: stretch;
+  vertical-align: top;
+  z-index: 1;
+  gap: 0; 
+}
+
+/* Ajustes no Botão Original (Acessar) */
+.auvo-ext-processed {
+  margin: 0 !important;
+  flex-grow: 1;
+  border-radius: 4px !important; 
+}
+
+.auvo-ext-container {
+  display: flex;
+  position: relative;
+  margin: 0;
+}
+
+/* ==========================================================================
+   2. O GATILHO (BOTÃO DA SETA)
+   ========================================================================== */
+
+.auvo-ext-trigger {
+  position: relative;
+  width: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px; 
+  background-color: #17c3ce; /* Cor padrão, ajustada via JS */
+  border: none;
+  z-index: 10;
+  color: white; 
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.auvo-ext-trigger:hover {
+  filter: brightness(0.9);
+}
+
+.auvo-ext-container.is-open .auvo-ext-trigger {
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+}
+
+.auvo-ext-trigger svg {
+  transition: transform 0.3s ease;
+}
+
+.auvo-ext-container.is-open .auvo-ext-trigger svg {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   3. O MENU DROPDOWN
+   ========================================================================== */
+
+.auvo-ext-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  background-color: white;
+  min-width: 360px; /* Levemente maior para caber 3 abas */
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+  z-index: 999999;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  overflow: hidden;
+  animation: auvoSlideDown 0.2s ease-out;
+}
+
+.auvo-ext-container.is-open .auvo-ext-menu {
+  display: block;
+}
+
+@keyframes auvoSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   4. SISTEMA DE ABAS
+   ========================================================================== */
+
+.auvo-tabs-header {
+  display: flex;
+  background-color: #f8f9fa;
+  padding: 6px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.auvo-tab-btn {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #868e96;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.auvo-tab-btn:hover {
+  color: #495057;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.auvo-tab-btn.active {
+  background-color: white;
+  color: #6610f2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+/* ==========================================================================
+   5. VIEWS & ITENS GERAIS
+   ========================================================================== */
+
+.auvo-view {
+  display: none;
+  padding: 12px;
+}
+
+.auvo-view.active {
+  display: block;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.auvo-ext-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.auvo-ext-label-btn {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  color: #495057;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+  margin-right: 8px;
+}
+
+.auvo-ext-label-btn:hover {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+  color: #1565c0;
+  transform: translateX(2px);
+}
+
+.auvo-ext-icon-spacer {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.auvo-ext-input {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.auvo-ext-input:focus {
+  border-color: #2196f3;
+  width: 85px;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.auvo-ext-action-btn {
+  display: none;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 0;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.auvo-ext-action-btn:hover {
+  background-color: #218838;
+}
+
+/* ==========================================================================
+   6. ESTILOS PROCEDIMENTOS & SERVIDORES
+   ========================================================================== */
+
+.auvo-proc-group {
+  margin-bottom: 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.auvo-proc-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #868e96;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #f1f3f5;
+  padding-bottom: 4px;
+}
+
+.auvo-proc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auvo-proc-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 12px;
+  box-sizing: border-box; 
+  transition: border-color 0.2s;
+  background-color: #f8f9fa;
+}
+
+.auvo-proc-input:focus {
+  background-color: #fff;
+  border-color: #6610f2;
+  outline: none;
+}
+
+.auvo-proc-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 6px;
+}
+
+.auvo-btn-proc {
+  padding: 6px 4px;
+  border: 1px solid #6610f2;
+  background-color: white;
+  color: #6610f2;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.auvo-btn-proc:hover {
+  background-color: #6610f2;
+  color: white;
+}
+
+/* ==========================================================================
+   7. BOTÕES DE FERRAMENTAS (IA E MAPPER)
+   ========================================================================== */
+
+.auvo-tool-btn {
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 8px;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}
+
+.auvo-tool-btn:hover {
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-ia-roxo { background-color: #7b1fa2; }
+.btn-ia-roxo:hover { background-color: #4a148c; }
+
+.btn-schema-laranja { background-color: #e65100; }
+.btn-schema-laranja:hover { background-color: #bf360c; }
+
+.btn-map-azul { 
+    background-color: #0288d1; 
+    display: block; 
+    width: fit-content;
+    margin: 10px auto; 
+    font-size: 14px;
+    padding: 8px 16px;
+}
+.btn-map-azul:hover { background-color: #01579b; }
+
+.auvo-tool-btn:disabled {
+    background-color: #9e9e9e !important;
+    cursor: wait;
+}
+/* ==========================================================================
+   8. ESTILO DO BOTÃO "COPIAR DATA ID"
+   ========================================================================== */
+
+.auvo-ext-copy-id {
+    display: flex !important;
+    align-items: center;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+    font-weight: 600 !important; /* Negrito para destaque */
+    color: #e65100 !important; /* Cor Laranja/Cobre */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    /* Ajuste de padding para alinhar com os outros itens do menu */
+    padding: 8px 24px !important; 
+}
+
+/* Alinhamento do ícone */
+.auvo-ext-copy-id i {
+    width: 16px;
+    text-align: center;
+}
+
+/* Efeito ao passar o mouse (Hover) */
+.auvo-ext-copy-id:hover {
+    background-color: #fff3e0 !important; /* Fundo laranja bem claro */
+    color: #bf360c !important; /* Texto laranja mais escuro */
+    text-decoration: none !important;
+}
+
+/* Estado de sucesso (Quando clica e copia) */
+.auvo-ext-copy-id.copiado {
+    color: #28a745 !important; /* Verde sucesso */
+}
+.auvo-ext-copy-id.copiado:hover {
+    background-color: #e8f5e9 !important; /* Fundo verde claro */
+}
+
+/* ==========================================================================
+   BOTÃO GHOST - COPIAR ID eNotas
+   ========================================================================== */
+
+.auvo-btn-enotas-ghost {
+    background: none;
+    border: 1px solid transparent;
+    color: #6610f2;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 2px 10px;
+    margin-left: 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.auvo-btn-enotas-ghost:hover {
+    background-color: rgba(102, 16, 242, 0.08);
+    border-color: #6610f2;
+}
+
+.auvo-btn-enotas-ghost:disabled {
+    color: #868e96;
+    cursor: wait;
+    border-color: transparent;
+    background: none;
+}
+
+/* Spinner animação para ícone de loading */
+.auvo-spin {
+    animation: auvoSpin 0.8s linear infinite;
+}
+
+@keyframes auvoSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Botão Habilitar - Status eNotas (verde) */
+.auvo-btn-enotas-habilitar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.auvo-btn-enotas-habilitar:hover {
+    background-color: #218838;
+    box-shadow: 0 2px 6px rgba(40, 167, 69, 0.4);
+}
+
+.auvo-btn-enotas-habilitar:disabled {
+    background-color: #9e9e9e;
+    cursor: wait;
+}
+
+/* ==========================================================================
+   9. MODO PRINT LIMPO (ESCONDER APENAS BOTÕES DE IA)
+   ========================================================================== */
+
+/* Quando o body tiver essa classe, esconda APENAS os botões de IA da nota fiscal */
+body.auvo-ext-hide-ai .auvo-ext-ai-button {
+    display: none !important;
+}
+
+/* ==========================================================================
+   10. BOTÃO DE BANCO DE DADOS (AUDITORIA)
+   ========================================================================== */
+
+.auvo-btn-db {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    border: none;
+}
+
+.auvo-btn-db:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.auvo-btn-db svg {
+    flex-shrink: 0;
+}
+
+/* Botão inline ao lado do Limpar Exceções */
+.auvo-btn-banco-inline {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    vertical-align: middle;
+    text-decoration: none !important;
+}
+
+.auvo-btn-banco-inline:hover {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.auvo-btn-banco-inline svg {
+    flex-shrink: 0;
+}
+
+/* Botão de Download DB nas exceções */
+.auvo-btn-download-db {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.auvo-btn-download-db:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.auvo-btn-download-db svg {
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   CHAT IA - BALÃO FLUTUANTE
+   ========================================================================== */
+
+#auvo-chat-container {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  right: auto !important;
+  z-index: 999999 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Estados do Chat */
+.auvo-chat-minimizado .auvo-chat-header,
+.auvo-chat-minimizado .auvo-chat-body {
+  display: none !important;
+}
+
+.auvo-chat-minimizado .auvo-chat-fab {
+  display: flex !important;
+}
+
+.auvo-chat-aberto .auvo-chat-fab {
+  display: none !important;
+}
+
+.auvo-chat-aberto .auvo-chat-header,
+.auvo-chat-aberto .auvo-chat-body {
+  display: flex !important;
+}
+
+/* Botão FAB (Floating Action Button) */
+.auvo-chat-fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.auvo-chat-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.auvo-chat-fab-icone {
+  font-size: 28px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.7), 0 0 0 8px rgba(102, 126, 234, 0.1);
+  }
+}
+
+/* Container do Chat Aberto */
+.auvo-chat-header,
+.auvo-chat-body {
+  display: none;
+}
+
+.auvo-chat-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px;
+  border-radius: 16px 16px 0 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auvo-chat-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.auvo-chat-icone {
+  font-size: 24px;
+}
+
+.auvo-chat-acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.auvo-chat-btn-minimizar,
+.auvo-chat-btn-fechar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.auvo-chat-btn-minimizar:hover,
+.auvo-chat-btn-fechar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Body do Chat */
+.auvo-chat-body {
+  background: white;
+  width: 380px;
+  height: 500px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Área de Mensagens */
+.auvo-chat-mensagens {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f7f8fa;
+}
+
+.auvo-chat-mensagens::-webkit-scrollbar {
+  width: 6px;
+}
+
+.auvo-chat-mensagens::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.auvo-chat-mensagens::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Mensagem */
+.auvo-chat-msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auvo-chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.auvo-chat-msg-ia .auvo-chat-avatar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.auvo-chat-msg-usuario .auvo-chat-avatar {
+  background: #48bb78;
+}
+
+.auvo-chat-texto {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.auvo-chat-msg-usuario .auvo-chat-texto {
+  background: #667eea;
+  color: white;
+  margin-left: auto;
+}
+
+.auvo-chat-msg-usuario {
+  flex-direction: row-reverse;
+}
+
+.auvo-chat-texto ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.auvo-chat-texto li {
+  margin: 4px 0;
+}
+
+.auvo-chat-texto strong {
+  font-weight: 600;
+}
+
+.auvo-chat-texto em {
+  font-style: italic;
+}
+
+/* Indicador de digitação */
+.auvo-chat-digitando {
+  display: flex;
+  gap: 4px;
+  padding: 16px !important;
+}
+
+.auvo-chat-digitando span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #667eea;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.auvo-chat-digitando span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.auvo-chat-digitando span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Input de Mensagem */
+.auvo-chat-input-container {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  align-items: flex-end;
+}
+
+#auvo-chat-input {
+  flex: 1;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  max-height: 120px;
+  min-height: 40px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#auvo-chat-input:focus {
+  border-color: #667eea;
+}
+
+.auvo-chat-btn-enviar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.auvo-chat-btn-enviar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.auvo-chat-btn-enviar:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   MODAL DE SOLUÇÃO IA - NOTA FISCAL
+   ========================================================================== */
+
+.auvo-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  animation: auvoFadeIn 0.2s ease;
+  padding: 20px;
+}
+
+@keyframes auvoFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.auvo-modal-solucao {
+  background: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 80vh;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: auvoModalSlideIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@keyframes auvoModalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auvo-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auvo-modal-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.auvo-modal-titulo-icone {
+  font-size: 22px;
+}
+
+.auvo-modal-btn-fechar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.auvo-modal-btn-fechar:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.auvo-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  background: #f8f9fa;
+}
+
+.auvo-modal-conteudo {
+  background: white;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.auvo-modal-conteudo strong,
+.auvo-modal-conteudo b {
+  color: #7b1fa2;
+  font-weight: 600;
+}
+
+.auvo-modal-conteudo ul,
+.auvo-modal-conteudo ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.auvo-modal-conteudo li {
+  margin: 6px 0;
+}
+
+.auvo-modal-footer {
+  padding: 16px 20px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.auvo-modal-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.auvo-modal-btn-copiar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.auvo-modal-btn-copiar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.auvo-modal-btn-copiar.copiado {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.auvo-modal-btn-ok {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.auvo-modal-btn-ok:hover {
+  background: #dee2e6;
+}
+
+/* ==========================================================================
+   MODAL AUDITORIA NF (CONSULTA MYSQL)
+   ========================================================================== */
+
+.auvo-modal-auditoria {
+  max-width: 640px !important;
+}
+
+.auvo-modal-body-scroll {
+  overflow-y: auto;
+  max-height: 480px;
+  padding: 16px 20px;
+}
+
+.auvo-nf-auditoria-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.auvo-nf-auditoria-table {
+  width: 100%;
+  font-size: 13px;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.auvo-nf-label {
+  color: #666;
+  padding: 3px 8px;
+  width: 42%;
+  font-weight: 500;
+}
+
+.auvo-nf-valor {
+  padding: 3px 8px;
+  color: #222;
+  word-break: break-all;
+}
+
+.auvo-nf-auditoria-table tr:nth-child(even) {
+  background: #f0f0f0;
+}
+
+.auvo-nf-data-block {
+  margin-top: 8px;
+}
+
+.auvo-nf-data-label {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.auvo-nf-data-pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  overflow: auto;
+  max-height: 220px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+}

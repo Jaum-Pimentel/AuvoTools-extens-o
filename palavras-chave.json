@@ -1,0 +1,68 @@
+{
+  "Comportamentos Auvos": {
+    "palavrasChave": ["comportamento", "cultura", "valores", "auvo", "time", "equipe"],
+    "sinonimos": {}
+  },
+  "Conteúdo IA - Sheet1": {
+    "palavrasChave": ["CNAE", "código", "atividade", "fiscal", "tributário", "imposto", "categoria", "classificação"],
+    "sinonimos": {
+      "CNAE": ["cnae", "código de atividade", "atividade econômica", "classificação fiscal"]
+    }
+  },
+  "Documentação de Configuração do Módulo de Nota Fiscal - Auvo": {
+    "palavrasChave": ["nota fiscal", "NF", "NFe", "configuração", "módulo", "emissão", "CNAE", "Codigo fiscal"],
+    "sinonimos": {
+      "nota fiscal": ["NF", "NFe", "nota", "fiscal"]
+    }
+  },
+  "Guia de Ativação - Integração Auvo & Conta Azul": {
+    "palavrasChave": ["Conta Azul", "integração", "ativação", "sincronizar", "conectar"],
+    "sinonimos": {
+      "Conta Azul": ["contaazul", "conta-azul"]
+    }
+  },
+  "Guia de Ativação - Integração Auvo __ OmieSEMIMAGENS": {
+    "palavrasChave": ["Omie", "integração", "ativação", "ERP", "sincronizar"],
+    "sinonimos": {
+      "Omie": ["omie", "OMIE"]
+    }
+  },
+  "Guia de ativação de integração": {
+    "palavrasChave": ["integração", "ativação", "configurar", "conectar", "API"],
+    "sinonimos": {}
+  },
+  "Integração Auvo + Bling": {
+    "palavrasChave": ["Bling", "integração", "ERP", "estoque", "produtos", "sincronizar"],
+    "sinonimos": {
+      "Bling": ["bling", "BLING"]
+    }
+  },
+  "Inutilizacao_de_nota_fiscal_de_Produto-Auvo": {
+    "palavrasChave": ["inutilização", "nota fiscal", "cancelar", "anular", "NF", "produto"],
+    "sinonimos": {
+      "inutilização": ["inutilizar", "cancelar nota", "anular nota"]
+    }
+  },
+  "Manual de Contratos": {
+    "palavrasChave": ["contrato", "recorrência", "assinatura", "renovação", "cliente", "cobrança"],
+    "sinonimos": {
+      "contrato": ["contratos", "acordo", "termo"]
+    }
+  },
+  "Manual_do_usuario_Auvosemfotos": {
+    "palavrasChave": ["manual", "usuário", "guia", "tutorial", "como usar", "funcionalidades"],
+    "sinonimos": {}
+  },
+  "Principais informações OMIE (2)": {
+    "palavrasChave": ["Omie", "CNAE", "código", "tributação", "fiscal", "NCM", "CFOP"],
+    "sinonimos": {
+      "CNAE": ["cnae", "código de atividade"],
+      "NCM": ["ncm", "código NCM"],
+      "CFOP": ["cfop", "código fiscal"]
+    }
+  },
+  "Regras para fluxos de integrações": {
+    "palavrasChave": ["fluxo", "integração", "regras", "automação", "sincronização", "processo"],
+    "sinonimos": {}
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "AuvoTools EXT",
+  "version": "2.5",
+  "description": "Atalhos de procedimentos e IA para análise de erros de Nota Fiscal.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.auvo.com.br/*",
+    "*://*.2workers.me/*",
+    "*://*.auditoria.app/*",
+    "http://localhost:3000/*",
+    "https://*.up.railway.app/*",
+    "https://api.enotasgw.com.br/*"
+  ],
+  "incognito": "split",
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "popup/logotipo2.png",
+      "32": "popup/logotipo2.png",
+      "48": "popup/logotipo2.png"
+    }
+  },
+  "icons": {
+    "16": "popup/logotipo2.png",
+    "48": "popup/logotipo2.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.auvo.com.br/*", "*://*.2workers.me/*", "*://*.auditoria.app/*"],
+      "js": [
+        "utils.js",
+        "features/acesso.js",
+        "features/notafiscal.js",
+        "features/auditoria.js",
+        "features/chat-ia.js"
+      ],
+      "css": ["styles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["manuais.json"],
+      "matches": ["*://*.auvo.com.br/*", "*://*.2workers.me/*", "*://*.auditoria.app/*"]
+    }
+  ]
+
+}

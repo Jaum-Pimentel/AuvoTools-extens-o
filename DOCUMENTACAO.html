@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentacao Tecnica - AuvoTools CS + IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .version {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 15px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: #2c3e50;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #3498db;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        tr:hover {
+            background: #e8f4fd;
+        }
+
+        /* Code blocks */
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            color: #c7254e;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-box.note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-box.warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+
+        .info-box.success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .info-box.danger {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+
+        .info-box-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* File tree */
+        .file-tree {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        .file-tree ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .file-tree > ul {
+            padding-left: 0;
+        }
+
+        .file-tree li {
+            margin: 5px 0;
+        }
+
+        .file-tree .folder {
+            color: #f39c12;
+        }
+
+        .file-tree .file {
+            color: #3498db;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-primary { background: #667eea; color: white; }
+        .badge-success { background: #27ae60; color: white; }
+        .badge-warning { background: #f39c12; color: white; }
+        .badge-info { background: #3498db; color: white; }
+
+        /* Flowchart */
+        .flowchart {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .flow-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .content { padding: 20px; }
+            .nav ul { flex-direction: column; gap: 10px; }
+        }
+
+        /* Print styles */
+        @media print {
+            .nav { display: none; }
+            .container { box-shadow: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header class="header">
+        <h1>AuvoTools CS + IA</h1>
+        <span class="version">Versao 2.3</span>
+        <p class="subtitle">Documentacao Tecnica Completa</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul>
+            <li><a href="#visao-geral">Visao Geral</a></li>
+            <li><a href="#arquitetura">Arquitetura</a></li>
+            <li><a href="#instalacao">Instalacao</a></li>
+            <li><a href="#funcionalidades">Funcionalidades</a></li>
+            <li><a href="#modulos">Modulos</a></li>
+            <li><a href="#api">API Backend</a></li>
+            <li><a href="#configuracao">Configuracao</a></li>
+            <li><a href="#manutencao">Manutencao</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content -->
+    <div class="content">
+
+        <!-- 1. Visao Geral -->
+        <section id="visao-geral">
+            <h2>1. Visao Geral</h2>
+
+            <h3>1.1 Descricao do Projeto</h3>
+            <p>
+                O <strong>AuvoTools CS + IA</strong> e uma extensao para Google Chrome desenvolvida para otimizar
+                o fluxo de trabalho dos usuarios da plataforma Auvo. A extensao combina atalhos de navegacao
+                rapida com um sistema de Inteligencia Artificial baseado em RAG (Retrieval-Augmented Generation)
+                para auxiliar na resolucao de problemas e consulta de manuais.
+            </p>
+
+            <h3>1.2 Objetivos</h3>
+            <ul>
+                <li>Acelerar a navegacao entre modulos do sistema Auvo</li>
+                <li>Automatizar procedimentos repetitivos de suporte</li>
+                <li>Fornecer analise inteligente de erros de Nota Fiscal</li>
+                <li>Disponibilizar assistente virtual treinado com manuais da empresa</li>
+                <li>Melhorar a produtividade da equipe de Customer Success</li>
+            </ul>
+
+            <h3>1.3 Tecnologias Utilizadas</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">JS</div>
+                    <h4>JavaScript ES6+</h4>
+                    <p>Linguagem principal para content scripts e popup</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">AI</div>
+                    <h4>Google Gemini 2.0 Flash</h4>
+                    <p>Modelo de IA para processamento de linguagem natural</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">MV3</div>
+                    <h4>Manifest V3</h4>
+                    <p>Versao mais recente da API de extensoes Chrome</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">N</div>
+                    <h4>Node.js</h4>
+                    <p>Runtime para scripts de processamento de PDFs</p>
+                </div>
+            </div>
+
+            <h3>1.4 Dominios Suportados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dominio</th>
+                        <th>Sistema</th>
+                        <th>Regiao</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>app.auvo.com.br</td><td>Auvo Principal</td><td>Brasil</td></tr>
+                    <tr><td>cs.auvo.com.br</td><td>Customer Success</td><td>Brasil</td></tr>
+                    <tr><td>2workers.me</td><td>Auvo LATAM</td><td>America Latina</td></tr>
+                    <tr><td>cs.2workers.me</td><td>CS LATAM</td><td>America Latina</td></tr>
+                    <tr><td>auditoria.app</td><td>Sistema Auditoria</td><td>Global</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 2. Arquitetura -->
+        <section id="arquitetura">
+            <h2>2. Arquitetura do Sistema</h2>
+
+            <h3>2.1 Estrutura de Diretorios</h3>
+            <div class="file-tree">
+                <ul>
+                    <li><span class="folder">Auvo-Tools-Extension-main/</span>
+                        <ul>
+                            <li><span class="file">manifest.json</span> - Configuracao da extensao</li>
+                            <li><span class="file">utils.js</span> - Constantes e funcoes globais</li>
+                            <li><span class="file">styles.css</span> - Estilos injetados nas paginas</li>
+                            <li><span class="file">manuais.json</span> - Base de conhecimento indexada</li>
+                            <li><span class="file">palavras-chave.json</span> - Configuracao de busca</li>
+                            <li><span class="folder">popup/</span>
+                                <ul>
+                                    <li><span class="file">index.html</span> - Interface do popup</li>
+                                    <li><span class="file">script.js</span> - Logica do popup</li>
+                                    <li><span class="file">style.css</span> - Estilos do popup</li>
+                                    <li><span class="file">logo-2.png</span> - Icone da extensao</li>
+                                </ul>
+                            </li>
+                            <li><span class="folder">features/</span>
+                                <ul>
+                                    <li><span class="file">acesso.js</span> - Menu de navegacao rapida</li>
+                                    <li><span class="file">notafiscal.js</span> - Analise de erros NF</li>
+                                    <li><span class="file">auditoria.js</span> - Funcoes de auditoria</li>
+                                    <li><span class="file">chat-ia.js</span> - Assistente virtual</li>
+                                </ul>
+                            </li>
+                            <li><span class="folder">backend/</span>
+                                <ul>
+                                    <li><span class="file">server.js</span> - Servidor API Express</li>
+                                    <li><span class="file">processar-pdfs.js</span> - Processador de PDFs</li>
+                                    <li><span class="file">.env</span> - Variaveis de ambiente</li>
+                                </ul>
+                            </li>
+                            <li><span class="folder">scripts/</span>
+                                <ul>
+                                    <li><span class="file">extrair-pdfs.js</span> - Extrator de texto</li>
+                                </ul>
+                            </li>
+                            <li><span class="folder">meus_manuais/</span> - PDFs dos manuais</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3>2.2 Fluxo de Dados</h3>
+            <div class="flowchart">
+                <div class="flow-item">Usuario</div>
+                <span class="flow-arrow">&#8594;</span>
+                <div class="flow-item">Content Script</div>
+                <span class="flow-arrow">&#8594;</span>
+                <div class="flow-item">Chrome Storage</div>
+                <span class="flow-arrow">&#8594;</span>
+                <div class="flow-item">API Gemini</div>
+                <span class="flow-arrow">&#8594;</span>
+                <div class="flow-item">Resposta IA</div>
+            </div>
+
+            <h3>2.3 Diagrama de Componentes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Tipo</th>
+                        <th>Responsabilidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>manifest.json</td>
+                        <td>Configuracao</td>
+                        <td>Define permissoes, scripts e recursos da extensao</td>
+                    </tr>
+                    <tr>
+                        <td>utils.js</td>
+                        <td>Biblioteca</td>
+                        <td>Constantes globais, icones SVG e funcoes auxiliares</td>
+                    </tr>
+                    <tr>
+                        <td>acesso.js</td>
+                        <td>Feature</td>
+                        <td>Menu dropdown com atalhos de navegacao</td>
+                    </tr>
+                    <tr>
+                        <td>notafiscal.js</td>
+                        <td>Feature</td>
+                        <td>Deteccao e analise de erros de NF-e/NFS-e</td>
+                    </tr>
+                    <tr>
+                        <td>chat-ia.js</td>
+                        <td>Feature</td>
+                        <td>Interface de chat e sistema RAG</td>
+                    </tr>
+                    <tr>
+                        <td>popup/</td>
+                        <td>UI</td>
+                        <td>Painel de configuracoes da extensao</td>
+                    </tr>
+                    <tr>
+                        <td>backend/</td>
+                        <td>Servidor</td>
+                        <td>API REST para busca avancada (opcional)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 3. Instalacao -->
+        <section id="instalacao">
+            <h2>3. Instalacao e Configuracao</h2>
+
+            <h3>3.1 Requisitos</h3>
+            <ul>
+                <li>Google Chrome versao 88 ou superior</li>
+                <li>Node.js v18+ (para processamento de manuais)</li>
+                <li>Acesso a internet (para API Gemini)</li>
+            </ul>
+
+            <h3>3.2 Instalacao da Extensao</h3>
+            <div class="info-box note">
+                <div class="info-box-title">Passo a Passo</div>
+                <ol>
+                    <li>Baixe o repositorio do GitHub</li>
+                    <li>Abra o Chrome e acesse <code>chrome://extensions</code></li>
+                    <li>Ative o "Modo de desenvolvedor" no canto superior direito</li>
+                    <li>Clique em "Carregar sem compactacao"</li>
+                    <li>Selecione a pasta <code>Auvo-Tools-Extension-main</code></li>
+                </ol>
+            </div>
+
+            <h3>3.3 Configuracao do Backend (Opcional)</h3>
+            <pre><code><span class="code-comment"># Navegue ate a pasta backend</span>
+cd Auvo-Tools-Extension-main/backend
+
+<span class="code-comment"># Instale as dependencias</span>
+npm install express cors @google/generative-ai dotenv pdf-parse
+
+<span class="code-comment"># Configure o arquivo .env</span>
+GEMINI_API_KEY=sua_chave_aqui
+PORT=3000
+
+<span class="code-comment"># Inicie o servidor</span>
+node server.js</code></pre>
+
+            <h3>3.4 Processamento de Manuais</h3>
+            <pre><code><span class="code-comment"># Extrair texto dos PDFs</span>
+cd scripts
+node extrair-pdfs.js
+
+<span class="code-comment"># Reiniciar servidor para carregar manuais</span>
+cd ../backend
+node server.js</code></pre>
+        </section>
+
+        <!-- 4. Funcionalidades -->
+        <section id="funcionalidades">
+            <h2>4. Funcionalidades</h2>
+
+            <h3>4.1 Menu de Navegacao Rapida</h3>
+            <p>
+                O botao de login do sistema Auvo e expandido com uma seta que abre um menu dropdown.
+                Este menu oferece acesso rapido a diversas paginas do sistema.
+            </p>
+
+            <h4>Paginas Disponiveis</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>URL</th>
+                        <th>Aceita Codigo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>colaboradores</td><td>Colaboradores</td><td>/gerenciarColaboradores</td><td>Sim</td></tr>
+                    <tr><td>clientes</td><td>Clientes</td><td>/gerenciarClientes</td><td>Sim</td></tr>
+                    <tr><td>tarefas</td><td>Rel. Tarefas</td><td>/relatorioTarefas</td><td>Sim</td></tr>
+                    <tr><td>notafiscal</td><td>Nota Fiscal</td><td>/notafiscal</td><td>Nao</td></tr>
+                    <tr><td>config</td><td>Config. Gerais</td><td>/configuracoesGerais</td><td>Nao</td></tr>
+                    <tr><td>orcamentos</td><td>Orcamentos</td><td>/Orcamentos</td><td>Nao</td></tr>
+                    <tr><td>equipamentos</td><td>Equipamentos</td><td>/gerenciarEquipamentos</td><td>Nao</td></tr>
+                    <tr><td>produtos</td><td>Produtos</td><td>/gerenciarProdutos</td><td>Nao</td></tr>
+                    <tr><td>servicos</td><td>Servicos</td><td>/servico</td><td>Nao</td></tr>
+                    <tr><td>questionario</td><td>Questionarios</td><td>/gerenciarQuestionarios</td><td>Nao</td></tr>
+                    <tr><td>fatura</td><td>Faturas</td><td>https://app.auvo.com.br/faturas</td><td>Nao (externo)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>4.2 Analise de Erros de Nota Fiscal</h3>
+            <p>
+                Na pagina de Notas Fiscais, a extensao monitora erros exibidos na tela e adiciona
+                automaticamente um botao "ANALISAR ERRO (IA)" ao lado de cada mensagem de erro.
+            </p>
+
+            <div class="info-box success">
+                <div class="info-box-title">Como Funciona</div>
+                <ol>
+                    <li>A extensao detecta elementos com classe <code>.text-danger</code> ou <code>.alert-danger</code></li>
+                    <li>Filtra mensagens que contenham palavras-chave como "erro", "rejeicao", "schema"</li>
+                    <li>Injeta botao roxo "ANALISAR ERRO (IA)"</li>
+                    <li>Ao clicar, envia o texto do erro para a API Gemini</li>
+                    <li>Exibe modal com explicacao em linguagem simples</li>
+                </ol>
+            </div>
+
+            <h3>4.3 Assistente Virtual (Chat IA)</h3>
+            <p>
+                Balao de conversa flutuante que permite consultar os manuais da empresa usando linguagem natural.
+                Utiliza sistema RAG para buscar contexto relevante antes de gerar respostas.
+            </p>
+
+            <h4>Algoritmo de Busca</h4>
+            <pre><code><span class="code-keyword">function</span> buscarContextoRelevante(pergunta) {
+    <span class="code-comment">// 1. Normaliza a pergunta</span>
+    <span class="code-keyword">const</span> palavrasChave = extrairPalavrasChave(pergunta);
+
+    <span class="code-comment">// 2. Busca em cada manual</span>
+    manuaisIndexados.forEach(manual => {
+        manual.chunks.forEach(chunk => {
+            <span class="code-comment">// Calcula score de relevancia</span>
+            <span class="code-keyword">const</span> score = calcularRelevancia(palavrasChave, chunk.texto);
+            <span class="code-keyword">if</span> (score > 0) resultados.push({ texto, fonte, score });
+        });
+    });
+
+    <span class="code-comment">// 3. Retorna top 5 mais relevantes</span>
+    <span class="code-keyword">return</span> resultados.sort((a, b) => b.score - a.score).slice(0, 5);
+}</code></pre>
+
+            <h3>4.4 Procedimentos Automatizados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Procedimento</th>
+                        <th>Codigo</th>
+                        <th>Disponivel em</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Recuperar Tarefa</td><td>:5</td><td>BR e LATAM</td></tr>
+                    <tr><td>Mudar Cliente</td><td>:7</td><td>BR e LATAM</td></tr>
+                    <tr><td>Reabrir Tarefa</td><td>:16</td><td>Apenas BR</td></tr>
+                    <tr><td>Unificar por CNPJ</td><td>:15</td><td>Apenas BR</td></tr>
+                    <tr><td>Unificar por Nome</td><td>:8</td><td>BR e LATAM</td></tr>
+                </tbody>
+            </table>
+
+            <h3>4.5 Configuracoes do Popup</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Opcao</th>
+                        <th>Chave Storage</th>
+                        <th>Descricao</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Modo Print Limpo</td>
+                        <td>auvo_config_print_mode</td>
+                        <td>Oculta botoes de IA para impressao</td>
+                    </tr>
+                    <tr>
+                        <td>Guia Anonima</td>
+                        <td>auvo_config_incognito_mode</td>
+                        <td>Lembrete para ativar no modo anonimo</td>
+                    </tr>
+                    <tr>
+                        <td>Assistente IA</td>
+                        <td>chatIAHabilitado</td>
+                        <td>Habilita/desabilita balao de chat</td>
+                    </tr>
+                    <tr>
+                        <td>Paginas do Menu</td>
+                        <td>auvo_paginas_habilitadas</td>
+                        <td>Seleciona quais paginas aparecem</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 5. Modulos -->
+        <section id="modulos">
+            <h2>5. Detalhamento dos Modulos</h2>
+
+            <h3>5.1 utils.js</h3>
+            <p>Arquivo central com constantes e funcoes compartilhadas.</p>
+
+            <h4>Constantes Principais</h4>
+            <pre><code><span class="code-comment">// Dominios suportados</span>
+<span class="code-keyword">const</span> DOMINIOS_SUPORTADOS = [
+    <span class="code-string">"app.auvo.com.br"</span>,
+    <span class="code-string">"2workers.me"</span>,
+    <span class="code-string">"auditoria.app"</span>,
+    <span class="code-string">"cs.auvo.com.br"</span>,
+    <span class="code-string">"cs.2workers.me"</span>
+];
+
+<span class="code-comment">// Configuracao da IA</span>
+<span class="code-keyword">const</span> GEMINI_API_KEY = <span class="code-string">"sua_chave"</span>;
+<span class="code-keyword">const</span> GEMINI_MODEL = <span class="code-string">"gemini-2.0-flash"</span>;
+
+<span class="code-comment">// Icones SVG (Bootstrap Icons)</span>
+<span class="code-keyword">const</span> ICONES_SVG = {
+    colaboradores: <span class="code-string">'&lt;svg...&gt;'</span>,
+    clientes: <span class="code-string">'&lt;svg...&gt;'</span>,
+    <span class="code-comment">// ... outros icones</span>
+};</code></pre>
+
+            <h4>Funcoes Exportadas</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Funcao</th>
+                        <th>Retorno</th>
+                        <th>Descricao</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>isSystemLatam()</td><td>Boolean</td><td>Verifica se e sistema LATAM (2workers)</td></tr>
+                    <tr><td>getProcedimentoUrlBase()</td><td>String</td><td>Retorna URL base para procedimentos</td></tr>
+                    <tr><td>verificarDominioSuportado()</td><td>Boolean</td><td>Valida se dominio atual e suportado</td></tr>
+                    <tr><td>getCodigoBase()</td><td>String</td><td>Extrai codigo do Select2 ou input</td></tr>
+                    <tr><td>getIconeSVG(iconeKey)</td><td>String</td><td>Retorna SVG do icone solicitado</td></tr>
+                </tbody>
+            </table>
+
+            <h3>5.2 features/acesso.js</h3>
+            <p>Modulo responsavel pela criacao do menu dropdown de navegacao rapida.</p>
+
+            <div class="info-box note">
+                <div class="info-box-title">Funcionamento</div>
+                <p>
+                    O script monitora o DOM usando MutationObserver, aguardando o botao
+                    <code>#AcessarConta</code> ser renderizado. Quando detectado, injeta
+                    uma seta ao lado que abre um menu com abas: Geral, Procedimentos e Servidor.
+                </p>
+            </div>
+
+            <h3>5.3 features/notafiscal.js</h3>
+            <p>Modulo de monitoramento e analise de erros de Nota Fiscal.</p>
+
+            <h4>Palavras-chave Detectadas</h4>
+            <pre><code><span class="code-keyword">const</span> palavrasChave = [
+    <span class="code-string">'erro'</span>, <span class="code-string">'rejeicao'</span>, <span class="code-string">'falha'</span>, <span class="code-string">'invalid'</span>,
+    <span class="code-string">'descricao'</span>, <span class="code-string">'codigo'</span>, <span class="code-string">'correcao'</span>, <span class="code-string">'atencao'</span>,
+    <span class="code-string">'schema'</span>, <span class="code-string">'ncm'</span>, <span class="code-string">'cfop'</span>, <span class="code-string">'rejeicao'</span>,
+    <span class="code-string">'chave de acesso'</span>
+];</code></pre>
+
+            <h3>5.4 features/chat-ia.js</h3>
+            <p>Sistema de chat com IA usando RAG (Retrieval-Augmented Generation).</p>
+
+            <h4>Configuracao</h4>
+            <pre><code><span class="code-keyword">const</span> CHAT_CONFIG = {
+    apiKey: <span class="code-string">'sua_chave_gemini'</span>,
+    model: <span class="code-string">'gemini-2.0-flash'</span>,
+    manuaisJsonUrl: chrome.runtime.getURL(<span class="code-string">'manuais.json'</span>)
+};</code></pre>
+
+            <h4>Ciclo de Vida</h4>
+            <ol>
+                <li><strong>Inicializacao:</strong> Verifica se chat esta habilitado no storage</li>
+                <li><strong>Carregamento:</strong> Busca manuais.json (cache ou arquivo)</li>
+                <li><strong>Renderizacao:</strong> Cria balao flutuante no DOM</li>
+                <li><strong>Interacao:</strong> Usuario envia pergunta</li>
+                <li><strong>Busca RAG:</strong> Encontra chunks relevantes nos manuais</li>
+                <li><strong>Geracao:</strong> Envia contexto + pergunta para Gemini</li>
+                <li><strong>Resposta:</strong> Exibe resposta formatada no chat</li>
+            </ol>
+        </section>
+
+        <!-- 6. API -->
+        <section id="api">
+            <h2>6. API Backend</h2>
+
+            <h3>6.1 Visao Geral</h3>
+            <p>
+                O backend opcional oferece uma API REST para busca avancada nos manuais.
+                Utiliza Express.js e carrega o arquivo manuais.json na inicializacao.
+            </p>
+
+            <h3>6.2 Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metodo</th>
+                        <th>Endpoint</th>
+                        <th>Descricao</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-success">GET</span></td>
+                        <td>/health</td>
+                        <td>Health check do servidor</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">POST</span></td>
+                        <td>/api/chat</td>
+                        <td>Envia pergunta e recebe resposta da IA</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">POST</span></td>
+                        <td>/api/buscar</td>
+                        <td>Busca contexto sem gerar resposta</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">GET</span></td>
+                        <td>/api/stats</td>
+                        <td>Estatisticas dos manuais carregados</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-success">GET</span></td>
+                        <td>/api/manuais</td>
+                        <td>Lista todos os manuais indexados</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>6.3 Exemplo de Requisicao</h3>
+            <pre><code><span class="code-comment">// POST /api/chat</span>
+{
+    <span class="code-string">"pergunta"</span>: <span class="code-string">"Como configurar integracao Omie?"</span>
+}
+
+<span class="code-comment">// Resposta</span>
+{
+    <span class="code-string">"resposta"</span>: <span class="code-string">"Segundo o Guia de Integracao Omie..."</span>,
+    <span class="code-string">"fontes"</span>: [
+        { <span class="code-string">"fonte"</span>: <span class="code-string">"Guia de Ativacao Omie"</span>, <span class="code-string">"relevancia"</span>: <span class="code-string">"0.850"</span> }
+    ]
+}</code></pre>
+
+            <h3>6.4 Algoritmo de Busca</h3>
+            <div class="info-box note">
+                <div class="info-box-title">Sistema de Pontuacao</div>
+                <ul>
+                    <li><strong>+10 pontos:</strong> Match de palavra-chave configurada</li>
+                    <li><strong>+10 pontos:</strong> Match de termo principal</li>
+                    <li><strong>+8 pontos:</strong> Match de sinonimo</li>
+                    <li><strong>+5 pontos:</strong> Match de frase exata (ate 3 palavras)</li>
+                    <li><strong>+1 ponto:</strong> Match de palavra individual</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. Configuracao -->
+        <section id="configuracao">
+            <h2>7. Configuracao de Palavras-Chave</h2>
+
+            <h3>7.1 Arquivo palavras-chave.json</h3>
+            <p>
+                Este arquivo permite configurar palavras-chave e sinonimos para cada manual,
+                melhorando a precisao da busca.
+            </p>
+
+            <pre><code>{
+    <span class="code-string">"Documentacao de Configuracao do Modulo de Nota Fiscal - Auvo"</span>: {
+        <span class="code-string">"palavrasChave"</span>: [
+            <span class="code-string">"nota fiscal"</span>, <span class="code-string">"NF"</span>, <span class="code-string">"NFe"</span>,
+            <span class="code-string">"configuracao"</span>, <span class="code-string">"modulo"</span>, <span class="code-string">"emissao"</span>
+        ],
+        <span class="code-string">"sinonimos"</span>: {
+            <span class="code-string">"nota fiscal"</span>: [<span class="code-string">"NF"</span>, <span class="code-string">"NFe"</span>, <span class="code-string">"nota"</span>, <span class="code-string">"fiscal"</span>]
+        }
+    }
+}</code></pre>
+
+            <div class="info-box warning">
+                <div class="info-box-title">Importante</div>
+                <p>
+                    O nome da chave no JSON deve ser <strong>exatamente igual</strong> ao nome do arquivo PDF,
+                    porem <strong>sem a extensao .pdf</strong>.
+                </p>
+            </div>
+
+            <h3>7.2 Manuais Configurados</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Manual</th>
+                        <th>Palavras-Chave</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Comportamentos Auvos</td><td>comportamento, cultura, valores, time, equipe</td></tr>
+                    <tr><td>Conteudo IA - Sheet1</td><td>CNAE, codigo, atividade, fiscal, tributario</td></tr>
+                    <tr><td>Config. Modulo NF</td><td>nota fiscal, NF, NFe, configuracao, emissao</td></tr>
+                    <tr><td>Integracao Conta Azul</td><td>Conta Azul, integracao, ativacao, sincronizar</td></tr>
+                    <tr><td>Integracao Omie</td><td>Omie, integracao, ERP, sincronizar</td></tr>
+                    <tr><td>Integracao Bling</td><td>Bling, integracao, ERP, estoque, produtos</td></tr>
+                    <tr><td>Inutilizacao NF</td><td>inutilizacao, nota fiscal, cancelar, anular</td></tr>
+                    <tr><td>Manual de Contratos</td><td>contrato, recorrencia, assinatura, renovacao</td></tr>
+                    <tr><td>Manual do Usuario</td><td>manual, usuario, guia, tutorial, funcionalidades</td></tr>
+                    <tr><td>Informacoes Omie</td><td>Omie, CNAE, NCM, CFOP, tributacao</td></tr>
+                    <tr><td>Regras de Integracoes</td><td>fluxo, integracao, regras, automacao</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 8. Manutencao -->
+        <section id="manutencao">
+            <h2>8. Manutencao e Atualizacoes</h2>
+
+            <h3>8.1 Adicionar Novo Manual</h3>
+            <ol>
+                <li>Coloque o PDF na pasta <code>meus_manuais/</code></li>
+                <li>Adicione as palavras-chave no arquivo <code>palavras-chave.json</code></li>
+                <li>Execute o extrator:
+                    <pre><code>cd scripts
+node extrair-pdfs.js</code></pre>
+                </li>
+                <li>Reinicie o servidor (se estiver usando):
+                    <pre><code>cd ../backend
+node server.js</code></pre>
+                </li>
+            </ol>
+
+            <h3>8.2 Atualizar Manual Existente</h3>
+            <ol>
+                <li>Substitua o PDF na pasta <code>meus_manuais/</code></li>
+                <li>Execute novamente: <code>node scripts/extrair-pdfs.js</code></li>
+                <li>Reinicie o servidor</li>
+            </ol>
+
+            <h3>8.3 Editar Manualmente o manuais.json</h3>
+            <div class="info-box warning">
+                <div class="info-box-title">Atencao</div>
+                <p>
+                    Se voce editar o arquivo <code>manuais.json</code> manualmente, basta reiniciar
+                    o servidor. Porem, se executar <code>extrair-pdfs.js</code> novamente, suas
+                    alteracoes manuais serao sobrescritas.
+                </p>
+            </div>
+
+            <h3>8.4 Troubleshooting</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problema</th>
+                        <th>Causa Provavel</th>
+                        <th>Solucao</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chat nao responde</td>
+                        <td>API Key invalida</td>
+                        <td>Verifique a chave no utils.js</td>
+                    </tr>
+                    <tr>
+                        <td>Manuais nao carregam</td>
+                        <td>Arquivo manuais.json ausente</td>
+                        <td>Execute node extrair-pdfs.js</td>
+                    </tr>
+                    <tr>
+                        <td>Menu nao aparece</td>
+                        <td>Extensao desativada</td>
+                        <td>Recarregue em chrome://extensions</td>
+                    </tr>
+                    <tr>
+                        <td>Erro npm install</td>
+                        <td>PowerShell bloqueando</td>
+                        <td>Use CMD ou Set-ExecutionPolicy</td>
+                    </tr>
+                    <tr>
+                        <td>IA nao encontra info</td>
+                        <td>Palavras-chave ausentes</td>
+                        <td>Configure palavras-chave.json</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>8.5 Versionamento</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Versao</th>
+                        <th>Data</th>
+                        <th>Alteracoes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2.3</td>
+                        <td>2025-01</td>
+                        <td>Config de paginas, icones SVG, backend simplificado</td>
+                    </tr>
+                    <tr>
+                        <td>2.2</td>
+                        <td>2024-12</td>
+                        <td>Chat IA com RAG, manuais indexados</td>
+                    </tr>
+                    <tr>
+                        <td>2.1</td>
+                        <td>2024-11</td>
+                        <td>Analise de erros NF com Gemini</td>
+                    </tr>
+                    <tr>
+                        <td>2.0</td>
+                        <td>2024-10</td>
+                        <td>Menu de navegacao rapida, procedimentos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>AuvoTools CS + IA</strong> - Documentacao Tecnica</p>
+        <p>Desenvolvido para Auvo Tecnologia</p>
+        <p>Ultima atualizacao: Janeiro 2025</p>
+    </footer>
+</div>
+
+</body>
+</html>

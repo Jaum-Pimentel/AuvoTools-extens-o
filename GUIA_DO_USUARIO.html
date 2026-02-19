@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Usuário - Extensão AuvoTools</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="popup/logotipo2.png">
+    <link rel="shortcut icon" type="image/png" href="popup/logotipo2.png">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f1a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(125deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23667eea' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: #667eea;
+            top: -200px;
+            right: -200px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: #764ba2;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: #f093fb;
+            top: 50%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(0, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .lead {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .badge-version {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .glass-card h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .glass-card p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Buttons */
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-discord {
+            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
+        }
+
+        .btn-outline-glass {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-outline-glass:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-number {
+            font-size: 5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-top: -30px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+        }
+
+        /* Steps */
+        .step-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card h5 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-card p {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        /* Tables */
+        .table-glass {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-glass table {
+            margin: 0;
+        }
+
+        .table-glass th {
+            background: rgba(102, 126, 234, 0.4);
+            border: none;
+            padding: 1.2rem 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .table-glass td {
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(30, 30, 50, 0.6);
+        }
+
+        .table-glass tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-glass tr:hover td {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        /* Alert Boxes */
+        .alert-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+        }
+
+        .alert-glass.alert-info {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .alert-glass.alert-warning {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .alert-glass.alert-success {
+            border-left: 4px solid #10b981;
+        }
+
+        .alert-glass.alert-purple {
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .alert-glass .alert-title {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Accordion */
+        .accordion-glass .accordion-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px !important;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-glass .accordion-button {
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            padding: 1.25rem 1.5rem;
+            box-shadow: none;
+        }
+
+        .accordion-glass .accordion-button:not(.collapsed) {
+            background: rgba(102, 126, 234, 0.1);
+            color: white;
+        }
+
+        .accordion-glass .accordion-button::after {
+            filter: invert(1);
+        }
+
+        .accordion-glass .accordion-body {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem;
+        }
+
+        /* Accordion collapse states */
+        .accordion-collapse {
+            display: none;
+        }
+
+        .accordion-collapse.show {
+            display: block;
+        }
+
+        /* Navbar collapse (mobile) */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                display: none;
+            }
+
+            .navbar-collapse.show {
+                display: block;
+            }
+        }
+
+        /* Navbar */
+        .navbar-glass {
+            background: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-glass .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+        }
+
+        .navbar-glass .nav-link:hover {
+            color: white;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 0 30px;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Divider */
+        .divider-gradient {
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            width: 100px;
+            margin: 20px 0;
+        }
+
+        /* Code */
+        code {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a5b4fc;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .section-number {
+                font-size: 3rem;
+            }
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0f1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-animated">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-glass fixed-top">
+    <div class="container-fluid px-4 px-lg-5">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-lightning-charge-fill me-2"></i>AuvoTools EXT
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="bi bi-list text-white fs-4"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#instalacao">Instalação</a></li>
+                <li class="nav-item"><a class="nav-link" href="#navegacao">Navegação</a></li>
+                <li class="nav-item"><a class="nav-link" href="#servidores">Servidores</a></li>
+                <li class="nav-item"><a class="nav-link" href="#chat-ia">Chat IA</a></li>
+                <li class="nav-item"><a class="nav-link" href="#nota-fiscal">Nota Fiscal</a></li>
+                <li class="nav-item"><a class="nav-link" href="#configuracoes">Configurações</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-gradient btn-sm" href="https://chromewebstore.google.com/detail/auvotools-cs-+-ia/migmfcadmmjfmnlkbbijmehdbljkpelh?authuser=0&hl=pt-BR" target="_blank">
+                        <i class="bi bi-download"></i> Instalar
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content">
+                <span class="badge-version">
+                    <i class="bi bi-stars me-2"></i>Versão 2.3 - Janeiro 2025
+                </span>
+                <h1>Extensão AuvoTools</h1>
+                <p class="lead">
+                    Guia completo para turbinar sua produtividade no sistema Auvo.
+                    Navegação rápida, assistente com IA e muito mais!
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="https://chromewebstore.google.com/detail/auvotools-cs-+-ia/migmfcadmmjfmnlkbbijmehdbljkpelh?authuser=0&hl=pt-BR"
+                       class="btn btn-gradient" target="_blank">
+                        <i class="bi bi-chrome"></i> Instalar Extensão
+                    </a>
+                    <a href="#instalacao" class="btn btn-outline-glass">
+                        <i class="bi bi-book"></i> Ver Guia
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="row g-4">
+                    <div class="col-6">
+                        <div class="glass-card text-center">
+                            <div class="feature-icon mx-auto">
+                                <i class="bi bi-lightning-charge-fill"></i>
+                            </div>
+                            <h4>Navegação Rápida</h4>
+                            <p>Acesse qualquer página com 2 cliques</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="glass-card text-center">
+                            <div class="feature-icon mx-auto">
+                                <i class="bi bi-robot"></i>
+                            </div>
+                            <h4>Assistente IA</h4>
+                            <p>Tire dúvidas com chatbot inteligente</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="glass-card text-center">
+                            <div class="feature-icon mx-auto">
+                                <i class="bi bi-file-earmark-text"></i>
+                            </div>
+                            <h4>Análise de Erros</h4>
+                            <p>Entenda erros de NF facilmente</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="glass-card text-center">
+                            <div class="feature-icon mx-auto">
+                                <i class="bi bi-gear-fill"></i>
+                            </div>
+                            <h4>Procedimentos</h4>
+                            <p>Ações automatizadas de suporte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 1: Instalação -->
+<section id="instalacao" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Instalação</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Instalação simples e rápida direto da Chrome Web Store oficial.
+                </p>
+                <a href="https://chromewebstore.google.com/detail/auvotools-cs-+-ia/migmfcadmmjfmnlkbbijmehdbljkpelh?authuser=0&hl=pt-BR"
+                   class="btn btn-gradient mt-4" target="_blank">
+                    <i class="bi bi-download"></i> Instalar Agora
+                </a>
+            </div>
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h5>Acesse a Chrome Web Store</h5>
+                            <p>Clique no botão "Instalar Agora" ou acesse o link da extensão no seu navegador Chrome.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h5>Clique em "Usar no Chrome"</h5>
+                            <p>Na página da extensão, clique no botão azul "Usar no Chrome" (ou "Add to Chrome").</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h5>Confirme a Instalação</h5>
+                            <p>Um popup pedirá permissão. Clique em "Adicionar extensão" para confirmar.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <h5>Pronto!</h5>
+                            <p>A extensão será instalada. Você verá o ícone do AuvoTools na barra de extensões.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-glass alert-warning mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-pin-angle-fill"></i> Fixar a Extensão (Recomendado)
+                    </div>
+                    <p class="mb-0">
+                        Clique no ícone de <strong>quebra-cabeça</strong> no Chrome, encontre "AuvoTools" e clique no <strong>alfinete</strong> para fixar na barra.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Menu de Navegação -->
+<section id="navegacao" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Menu de Navegação</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Acesse qualquer página do Auvo com apenas 2 cliques através do menu dropdown.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="alert-glass alert-success mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-lightbulb-fill"></i> Como Usar
+                    </div>
+                    <ol class="mb-0 ps-3">
+                        <li>Acesse qualquer página do Auvo (app.auvo.com.br ou cs.auvo.com.br)</li>
+                        <li>Procure o botão <strong>"Acessar Conta"</strong> no topo</li>
+                        <li>Clique na <strong>setinha</strong> ao lado do botão</li>
+                        <li>Escolha a página desejada no menu dropdown</li>
+                    </ol>
+                </div>
+
+                <div class="table-glass">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Página</th>
+                                <th>Função</th>
+                                <th>Aceita Código?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Colaboradores</strong></td><td>Gerenciar colaboradores</td><td><i class="bi bi-check-circle-fill text-success"></i> Sim, código do colaborador</td></tr>
+                            <tr><td><strong>Clientes</strong></td><td>Gerenciar clientes</td><td><i class="bi bi-check-circle-fill text-success"></i> Sim, código interno do cliente</td></tr>
+                            <tr><td><strong>Rel. Tarefas</strong></td><td>Relatório de tarefas</td><td><i class="bi bi-check-circle-fill text-success"></i> Sim, código da tarefa</td></tr>
+                            <tr><td><strong>Nota Fiscal</strong></td><td>Módulo NF-e/NFS-e</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Config. Gerais</strong></td><td>Configurações do sistema</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Orçamentos</strong></td><td>Gerenciar orçamentos</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Equipamentos</strong></td><td>Cadastro de equipamentos</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Produtos</strong></td><td>Cadastro de produtos</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Serviços</strong></td><td>Cadastro de serviços</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Questionários</strong></td><td>Gerenciar questionários</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                            <tr><td><strong>Faturas</strong></td><td>Visualizar faturas</td><td><i class="bi bi-x-circle-fill text-danger"></i> Não se aplica</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert-glass alert-purple mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-rocket-takeoff-fill"></i> Dica: Navegação com Código
+                    </div>
+                    <p class="mb-0">
+                        Selecione um cliente/colaborador/tarefa no Select2 do Auvo, depois use o menu.
+                        A extensão pegará o código automaticamente e abrirá a página já filtrada!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Procedimentos -->
+<section id="procedimentos" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Procedimentos</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Atalhos para ações comuns de suporte na aba "Procedimentos" do menu.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="table-glass">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Procedimento</th>
+                                <th>O que faz</th>
+                                <th>Disponibilidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Recuperar Tarefa</strong></td><td>Recupera tarefa excluída ou perdida</td><td><span class="badge bg-primary">Brasil + LATAM</span></td></tr>
+                            <tr><td><strong>Mudar Cliente</strong></td><td>Altera cliente de uma tarefa</td><td><span class="badge bg-primary">Brasil + LATAM</span></td></tr>
+                            <tr><td><strong>Reabrir Tarefa</strong></td><td>Reabre tarefa finalizada</td><td><span class="badge bg-success">Apenas Brasil</span></td></tr>
+                            <tr><td><strong>Unificar (CNPJ)</strong></td><td>Unifica clientes pelo CNPJ</td><td><span class="badge bg-success">Apenas Brasil</span></td></tr>
+                            <tr><td><strong>Unificar (Nome)</strong></td><td>Unifica clientes pelo nome</td><td><span class="badge bg-primary">Brasil + LATAM</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert-glass alert-info mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-list-check"></i> Como Usar um Procedimento
+                    </div>
+                    <ol class="mb-0 ps-3">
+                        <li>Abra o menu (setinha ao lado de "Acessar Conta")</li>
+                        <li>Clique na aba <strong>"Procedimentos"</strong></li>
+                        <li>Selecione o procedimento desejado</li>
+                        <li>Uma nova aba abrirá com a página do procedimento</li>
+                        <li>Siga as instruções na tela</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Servidores -->
+<section id="servidores" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Aba Servidor</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Teste de conexão com os servidores do Auvo Brasil para diagnóstico rápido.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="alert-glass alert-warning mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-exclamation-triangle-fill"></i> Quando Usar Esta Função?
+                    </div>
+                    <ul class="mb-0 ps-3">
+                        <li>Quando o sistema Auvo estiver lento ou com erros</li>
+                        <li>Quando uma página não carregar corretamente</li>
+                        <li>Para verificar se o problema é no servidor ou na sua conexão</li>
+                        <li>Quando um cliente reportar lentidão e você precisar identificar qual servidor ele usa</li>
+                    </ul>
+                </div>
+
+                <div class="alert-glass alert-info mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-search"></i> Como Testar os Servidores
+                    </div>
+                    <ol class="mb-0 ps-3">
+                        <li>Abra o menu (setinha ao lado de "Acessar Conta")</li>
+                        <li>Clique na aba <strong>"Servidor"</strong></li>
+                        <li>Você verá a lista dos 4 servidores disponíveis</li>
+                        <li>Clique em um servidor para testar a conexão</li>
+                    </ol>
+                </div>
+
+                <div class="table-glass">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Servidor</th>
+                                <th>URL</th>
+                                <th>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>App1</strong></td><td><code>app1.auvo.com.br</code></td><td><span class="badge bg-warning text-dark">Servidor Padrão</span></td></tr>
+                            <tr><td><strong>App2</strong></td><td><code>app2.auvo.com.br</code></td><td>Servidor secundário</td></tr>
+                            <tr><td><strong>App3</strong></td><td><code>app3.auvo.com.br</code></td><td>Servidor secundário</td></tr>
+                            <tr><td><strong>App4</strong></td><td><code>app4.auvo.com.br</code></td><td>Servidor secundário</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert-glass alert-purple mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-lightbulb-fill"></i> Dica
+                    </div>
+                    <p class="mb-0">
+                        O <strong>App1</strong> é o servidor padrão onde nós aqui da Auvo estamos logados.
+                        Caso o cliente entre em contato relatando lentidão, teste os outros servidores (App2, App3, App4)
+                        para verificar se o problema é geral ou específico de um servidor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 5: Chat IA -->
+<section id="chat-ia" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Assistente IA</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Chatbot treinado com os manuais da Auvo para tirar dúvidas rapidamente.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="alert-glass alert-success mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-robot"></i> Como Acessar o Chat
+                    </div>
+                    <ol class="mb-0 ps-3">
+                        <li>Acesse qualquer página do Auvo</li>
+                        <li>Procure o <strong>balão roxo</strong> no canto inferior direito</li>
+                        <li>Clique no balão para abrir o chat</li>
+                        <li>Digite sua pergunta e pressione Enter</li>
+                    </ol>
+                </div>
+
+                <h5 class="mb-3"><i class="bi bi-chat-dots-fill me-2"></i>Exemplos de Perguntas</h5>
+                <div class="accordion accordion-glass" id="accordionExemplos">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ex1">
+                                "Como configurar a integração com Omie?"
+                            </button>
+                        </h2>
+                        <div id="ex1" class="accordion-collapse collapse" data-bs-parent="#accordionExemplos">
+                            <div class="accordion-body">
+                                O assistente buscará no Guia de Ativação Omie e explicará o passo a passo para configurar a integração ERP.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ex2">
+                                "O que é CNAE e como preencher?"
+                            </button>
+                        </h2>
+                        <div id="ex2" class="accordion-collapse collapse" data-bs-parent="#accordionExemplos">
+                            <div class="accordion-body">
+                                O assistente explicará o que é o Código Nacional de Atividades Econômicas e como encontrar o CNAE correto.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ex3">
+                                "Como emitir uma nota fiscal de serviço?"
+                            </button>
+                        </h2>
+                        <div id="ex3" class="accordion-collapse collapse" data-bs-parent="#accordionExemplos">
+                            <div class="accordion-body">
+                                O assistente consultará o Manual de Nota Fiscal e listará os passos para emissão de NFS-e.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-glass alert-warning mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-exclamation-circle-fill"></i> Limitações do Chat
+                    </div>
+                    <ul class="mb-0 ps-3">
+                        <li>O assistente só responde sobre assuntos dos manuais da Auvo</li>
+                        <li>Ele não tem acesso a dados específicos de clientes ou contas</li>
+                        <li>Para dúvidas muito específicas, consulte um supervisor</li>
+                        <li>Se a resposta não for satisfatória, tente reformular a pergunta</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 6: Análise de Erros NF -->
+<section id="nota-fiscal" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">Análise de Erros NF</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Entenda erros de Nota Fiscal em linguagem simples com ajuda da IA.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="alert-glass alert-success mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-search"></i> Como Funciona
+                    </div>
+                    <ol class="mb-0 ps-3">
+                        <li>Acesse a página de <strong>Nota Fiscal</strong> no Auvo</li>
+                        <li>Quando um erro aparecer (texto vermelho), procure o botão roxo <strong>"ANALISAR ERRO (IA)"</strong></li>
+                        <li>Clique no botão</li>
+                        <li>Um popup aparecerá com a explicação do erro em linguagem simples</li>
+                        <li>O popup também sugere possíveis soluções</li>
+                    </ol>
+                </div>
+
+                <div class="table-glass">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Erro</th>
+                                <th>Exemplos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Rejeição SEFAZ</strong></td><td>Rejeição 204, Rejeição 539, Rejeição 778</td></tr>
+                            <tr><td><strong>Erro de Schema</strong></td><td>Erro de validação XML, campo obrigatório</td></tr>
+                            <tr><td><strong>Erro de NCM</strong></td><td>NCM inválido, NCM não encontrado</td></tr>
+                            <tr><td><strong>Erro de CFOP</strong></td><td>CFOP incompatível, CFOP inválido</td></tr>
+                            <tr><td><strong>Erro de Certificado</strong></td><td>Certificado expirado, certificado inválido</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert-glass alert-purple mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-lightbulb-fill"></i> Dica
+                    </div>
+                    <p class="mb-0">
+                        A IA analisa o texto do erro e busca informações nos manuais para dar uma explicação clara e sugerir como resolver.
+                        Use essa funcionalidade para entender erros técnicos sem precisar pesquisar manualmente!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 7: Configurações -->
+<section id="configuracoes" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">07</span>
+                <h2 class="section-title">Configurações</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Personalize a extensão de acordo com suas preferências.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="alert-glass alert-info mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-gear-fill"></i> Como Acessar as Configurações
+                    </div>
+                    <ol class="mb-0 ps-3">
+                        <li>Clique no ícone do <strong>AuvoTools</strong> na barra de extensões</li>
+                        <li>O popup de configurações abrirá</li>
+                        <li>Ajuste as opções conforme sua preferência</li>
+                        <li>Clique em <strong>"Salvar e Atualizar"</strong></li>
+                    </ol>
+                </div>
+
+                <div class="table-glass">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Opção</th>
+                                <th>O que faz</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Modo Print Limpo</strong></td><td>Esconde botões de IA ao imprimir (útil para prints limpos)</td></tr>
+                            <tr><td><strong>Assistente IA</strong></td><td>Liga/desliga o balão do chat de IA</td></tr>
+                            <tr><td><strong>Páginas do Menu</strong></td><td>Escolha quais páginas aparecem no menu de navegação</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 8: Dicas -->
+<section id="dicas" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">08</span>
+                <h2 class="section-title">Dicas e Boas Práticas</h2>
+                <div class="divider-gradient"></div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="glass-card h-100">
+                            <div class="feature-icon">
+                                <i class="bi bi-fire"></i>
+                            </div>
+                            <h4>Atalhos Favoritos</h4>
+                            <p>Configure apenas as páginas que você mais usa no menu para acesso mais rápido.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="glass-card h-100">
+                            <div class="feature-icon">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </div>
+                            <h4>Perguntas Claras</h4>
+                            <p>Ao usar o chat, faça perguntas diretas e específicas para melhores respostas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="glass-card h-100">
+                            <div class="feature-icon">
+                                <i class="bi bi-printer-fill"></i>
+                            </div>
+                            <h4>Prints Limpos</h4>
+                            <p>Ative o "Modo Print Limpo" antes de tirar screenshots para clientes.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="glass-card h-100">
+                            <div class="feature-icon">
+                                <i class="bi bi-incognito"></i>
+                            </div>
+                            <h4>Modo Anônimo</h4>
+                            <p>A extensão também funciona no modo anônimo (ative nas configurações do Chrome).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-glass alert-success mt-4">
+                    <div class="alert-title">
+                        <i class="bi bi-stars"></i> Dicas para o Chat IA
+                    </div>
+                    <ul class="mb-0 ps-3">
+                        <li><strong>Seja específico:</strong> "Como configurar Omie" é melhor que "integração"</li>
+                        <li><strong>Use termos técnicos:</strong> CNAE, NCM, CFOP são reconhecidos</li>
+                        <li><strong>Uma pergunta por vez:</strong> Evite perguntas muito longas ou múltiplas</li>
+                        <li><strong>Reformule se necessário:</strong> Se não encontrar, tente sinais diferentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 9: FAQ -->
+<section id="faq" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">09</span>
+                <h2 class="section-title">FAQ</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Perguntas frequentes sobre a extensão.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="accordion accordion-glass" id="accordionFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                <i class="bi bi-shield-check me-2"></i> A extensão é segura?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Sim! A extensão está publicada na Chrome Web Store oficial do Google, que verifica todas as extensões antes de publicar. Além disso, ela não coleta dados pessoais nem senhas.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                <i class="bi bi-browser-chrome me-2"></i> Funciona no Firefox/Edge/Safari?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Atualmente a extensão foi desenvolvida apenas para <strong>Google Chrome</strong>. O Microsoft Edge (baseado em Chromium) pode funcionar, mas não é oficialmente suportado.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                <i class="bi bi-question-circle me-2"></i> O menu não aparece, o que fazer?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                <ol class="mb-0">
+                                    <li>Atualize a página (F5)</li>
+                                    <li>Verifique se a extensão está ativa em <code>chrome://extensions</code></li>
+                                    <li>Desative e ative a extensão novamente</li>
+                                    <li>Reinstale a extensão se o problema persistir</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                <i class="bi bi-robot me-2"></i> O chat IA não responde
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                <ul class="mb-0">
+                                    <li>Conexão com a internet instável</li>
+                                    <li>O serviço de IA pode estar temporariamente indisponível</li>
+                                    <li>Verifique se o "Assistente IA" está ativado nas configurações</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                <i class="bi bi-pc-display me-2"></i> Posso usar em mais de um computador?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Sim! Basta instalar a extensão em cada computador onde você usa o Chrome. Se você estiver logado na sua conta Google, as extensões podem sincronizar automaticamente.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                <i class="bi bi-arrow-repeat me-2"></i> A extensão atualiza automaticamente?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                            <div class="accordion-body">
+                                Sim! O Chrome atualiza extensões automaticamente quando uma nova versão é publicada na Chrome Web Store. Você não precisa fazer nada.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 10: Suporte -->
+<section id="suporte" class="section">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row">
+            <div class="col-lg-4 section-header">
+                <span class="section-number">10</span>
+                <h2 class="section-title">Precisa de Ajuda?</h2>
+                <div class="divider-gradient"></div>
+                <p class="section-subtitle">
+                    Entre em contato conosco para reportar bugs, sugestões ou dúvidas.
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <div class="alert-glass alert-info mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-envelope-fill"></i> Canais de Suporte
+                    </div>
+                    <ul class="mb-0 ps-3">
+                        <li><strong>Bugs ou erros:</strong> Reporte para a equipe de desenvolvimento</li>
+                        <li><strong>Sugestões:</strong> Envie suas ideias para melhorias</li>
+                        <li><strong>Dúvidas:</strong> Consulte este guia ou pergunte ao chat IA</li>
+                    </ul>
+                </div>
+
+                <div class="alert-glass alert-purple mb-4">
+                    <div class="alert-title">
+                        <i class="bi bi-discord"></i> Contato Direto com o Desenvolvedor
+                    </div>
+                    <p class="mb-0">
+                        Para reportar bugs, sugerir melhorias ou tirar dúvidas diretamente com o desenvolvedor, entre em contato pelo Discord.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                    <a href="https://discord.com/users/1181597947553644717" class="btn btn-gradient btn-discord" target="_blank">
+                        <i class="bi bi-discord"></i> Falar com o Desenvolvedor
+                    </a>
+                    <a href="https://chromewebstore.google.com/detail/auvotools-cs-+-ia/migmfcadmmjfmnlkbbijmehdbljkpelh?authuser=0&hl=pt-BR" class="btn btn-gradient" target="_blank">
+                        <i class="bi bi-star-fill"></i> Avaliar na Chrome Store
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <h4 class="mb-2">
+                    <i class="bi bi-lightning-charge-fill me-2" style="color: #667eea;"></i>
+                    AuvoTools EXT
+                </h4>
+                <p class="mb-0">Versão 2.3 - Janeiro 2025</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <p class="mb-0">Desenvolvido por João Pimentel e Vinicius Ferreira</p>
+                <p class="mb-0">para Auvo Tecnologia</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript Vanilla (sem dependência externa) -->
+<script>
+    // Accordion functionality
+    document.querySelectorAll('.accordion-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const target = document.querySelector(this.getAttribute('data-bs-target'));
+            const parent = document.querySelector(this.getAttribute('data-bs-parent'));
+
+            // Fecha outros accordions do mesmo grupo
+            if (parent) {
+                parent.querySelectorAll('.accordion-collapse.show').forEach(item => {
+                    if (item !== target) {
+                        item.classList.remove('show');
+                        item.previousElementSibling.querySelector('.accordion-button').classList.add('collapsed');
+                    }
+                });
+            }
+
+            // Toggle do accordion clicado
+            this.classList.toggle('collapsed');
+            target.classList.toggle('show');
+        });
+    });
+
+    // Navbar toggle (mobile)
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener('click', function() {
+            navbarCollapse.classList.toggle('show');
+        });
+
+        // Fecha navbar ao clicar em um link
+        navbarCollapse.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navbarCollapse.classList.remove('show');
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
