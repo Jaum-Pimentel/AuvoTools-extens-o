@@ -26,7 +26,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Resolve o caminho do manuais.json relativo ao server.js (funciona local e no Railway)
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ARQUIVO_MANUAIS = path.join(__dirname, '..', 'manuais.json');
+const ARQUIVO_MANUAIS = path.join(__dirname, 'manuais.json');
 
 let manuaisData = [];
 let dbPool = null;
